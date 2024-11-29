@@ -1,0 +1,28 @@
+.header {
+    background-color: #7cc29d; /* Verde del esquema */
+    padding: 1rem;
+  }
+  
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .nav-links {
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .nav-links li {
+    cursor: pointer;
+  }
+  
+  .category-dropdown {
+    margin-left: 0.5rem;
+  }
+  
+  .cart-icon {
+    font-size: 1.5rem;
+  }
