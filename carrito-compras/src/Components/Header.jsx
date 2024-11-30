@@ -1,23 +1,40 @@
 import "../Css/Header.css"
+import React, { useState } from "react"
+import { useCart } from "../Context/CartContext"
+
+
 
 const Header = () => {
+
+    const {cart} = useCart()
+    const [isBouncing, setIsBouncing] = useState (false)
+
+    const totalItems = cart.reduce((acc, item) => acc + item.quantity, 0)
+
+    const handleCartAnimation = () =>{
+        setIsBouncing(true)
+        setTimeout(()=> setIsBouncing(false), 500)
+    }
+
+    React.useEffect(()=>{
+        if (totalItems > 0){
+            handleCartAnimation()
+        }
+    }, [totalItems])
+
   return (
     <div>
         <header className="header">
       <nav className="navbar">
-        <h1 className="logo">Mi Tienda</h1>
+        <h1 className="logo">GameShop</h1>
         <ul className="nav-links">
-          <li><a href="/">Inicio</a></li>
-          <li>
-            Categorías
-            <select className="category-dropdown">
-              <option value="todos">Todos</option>
-              <option value="categoria1">Categoría 1</option>
-              <option value="categoria2">Categoría 2</option>
-            </select>
+          <li className="Inicio">
+            <a href="/">Inicio</a>
           </li>
           <li>
-            <a href="/cart" className="cart-icon">🛒</a>
+            <a href="/Cart" className={`cart-icon ${isBouncing ? "bounce" : ""}`}>
+                🛒 <span className="cart-count">{totalItems}</span>
+            </a>
           </li>
         </ul>
       </nav>

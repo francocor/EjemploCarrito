@@ -65,3 +65,13 @@
   button:hover {
     background-color: #6aad89;
   }
+
+  .filter-container {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+  }
+  
+  .form-select {
+    width: 200px;
+  }
