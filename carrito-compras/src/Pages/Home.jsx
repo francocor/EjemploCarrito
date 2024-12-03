@@ -4,7 +4,7 @@ import MainProductos from "../Components/Productos.jsx"
 import MainFooter from "../Components/Footer.jsx"
 const Home = () => {
   return (
-    <div>
+    <div >
         <MainHeader/>
         <MainProductos/>
         <MainFooter/>

@@ -5,14 +5,18 @@ import 'react-toastify/dist/ReactToastify.css';
 import Home from "./Pages/Home";
 import Carrito from "./Pages/Carrito";
 
+
 function App() {
   return (
     <CartProvider>
+      <div style={{ minHeight: "100vh", backgroundColor: "#000" }}>
+
       <ToastContainer /> 
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/cart" element={<Carrito />} /> 
       </Routes>
+      </div>
     </CartProvider>
   );
 }

@@ -13,11 +13,11 @@ import Ron from "../assets/RoN.jpg";
 const Productos = () => {
   const { addToCart } = useCart();
 
-  // Estados para categoría seleccionada y término de búsqueda
+  
   const [selectedCategory, setSelectedCategory] = useState("todos");
   const [searchTerm, setSearchTerm] = useState("");
 
-  // Lista de productos
+  
   const products = [
     { id: 1, name: "Call Of Duty: Black Ops 6", price: 100, genero: "accion", image: Cod6 },
     { id: 2, name: "God Of War: Ragnarok", price: 100, genero: "aventura", image: Gow },
@@ -27,7 +27,7 @@ const Productos = () => {
     { id: 6, name: "Ready or Not", price: 100, genero: "simulacion", image: Ron },
   ];
 
-  // Filtrar productos según categoría y búsqueda
+  
   const filteredProducts = products.filter((product) => {
     const matchesCategory =
       selectedCategory === "todos" || product.genero === selectedCategory;
@@ -39,7 +39,7 @@ const Productos = () => {
 
   return (
     <div className="container productos mt-4">
-      {/* Filtros: Categoría y búsqueda */}
+      
       <div className="filter-container mb-4">
         <label htmlFor="category" className="me-2">
           Categoría:
@@ -73,14 +73,19 @@ const Productos = () => {
 
       
       <div className="row">
-        {filteredProducts.map((product) => (
-          <div key={product.id} className="col-md-4 mb-4">
-            <ProductCard product={product} addToCart={addToCart} />
+        {filteredProducts.length > 0 ? (
+          filteredProducts.map((product) => (
+            <div key={product.id} className="col-md-4 mb-4">
+              <ProductCard product={product} addToCart={addToCart} />
+            </div>
+          ))
+        ) : (
+          <div className="col-12 text-center">
+            <h3>No se encontraron productos</h3>
           </div>
-        ))}
+        )}
       </div>
     </div>
-    
   );
 };
 
@@ -110,4 +115,5 @@ const ProductCard = ({ product, addToCart }) => {
 };
 
 export default Productos;
+
 
