@@ -1,36 +1,87 @@
+
 .cart-container {
-    background-color: #f8f9fa;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .table {
-    margin-top: 20px;
-  }
-  
-  .table-hover tbody tr:hover {
-    background-color: #f1f1f1;
-  }
-  
-  .cart-summary {
-    margin-top: 20px;
-  }
-  
-  .btn {
-    transition: all 0.3s ease;
-  }
-  
-  .btn:hover {
-    transform: scale(1.05);
-  }
-  
-  .btn-success {
-    background-color: #28a745;
-    border-color: #28a745;
-  }
-  
-  .btn-success:hover {
-    background-color: #218838;
-    border-color: #1e7e34;
-  }
+  background-color: #000;
+  color: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 
+    0 0 10px rgba(52, 152, 219, 0.4),
+    0 0 20px #3498db,
+    0 4px 6px rgba(0, 0, 0, 0.3);
+  font-family: "Jaro", sans-serif;
+}
+
+
+.cart-card {
+  background: linear-gradient(145deg, #2c3e50, #3498db);
+  border-radius: 12px;
+  padding: 1rem;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(52, 152, 219, 0.4), 0 4px 6px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 2px solid #3498db;
+}
+
+.cart-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 0 20px #3498db, 0 6px 12px rgba(0, 0, 0, 0.4);
+}
+
+
+.image-container {
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  margin-bottom: 1rem;
+  background-color: #1a1a1a;
+  border-radius: 8px;
+}
+
+.image-container img {
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+
+.cart-summary {
+  background: linear-gradient(145deg, #2c3e50, #3498db);
+  color: #fff;
+  box-shadow: 0 0 10px rgba(52, 152, 219, 0.4), 0 4px 6px rgba(0, 0, 0, 0.3);
+  margin-top: 2rem;
+}
+
+
+.custom-btn {
+  background: linear-gradient(145deg, #2c3e50, #3498db);
+  border: 2px solid #3498db;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  transition: all 0.3s ease;
+}
+
+.custom-btn:hover {
+  transform: scale(1.1);
+  background: linear-gradient(145deg, #3498db, #2c3e50);
+  color: #f1c40f;
+  border-color: #f1c40f;
+}
+
+
+.table {
+  margin-top: 1rem;
+  background-color: transparent;
+  color: #fff;
+}
+
+.table-hover tbody tr:hover {
+  background-color: rgba(52, 152, 219, 0.1);
+}
+
+.table-dark th {
+  background-color: #1a1a1a;
+  border-color: #3498db;
+}
