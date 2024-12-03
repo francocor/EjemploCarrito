@@ -1,7 +1,7 @@
 import "../Css/Productos.css";
 import { useState } from "react";
 import { useCart } from "../Context/CartContext";
-import {toast} from "react-toastify"
+import { toast } from "react-toastify";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Age from "../assets/Age.jpg";
 import Cod6 from "../assets/COD6.jpg";
@@ -13,67 +13,41 @@ import Ron from "../assets/RoN.jpg";
 const Productos = () => {
   const { addToCart } = useCart();
 
-  const [selectedCategory, setSelectedCategory] = useState ("todos")
+  // Estados para categoría seleccionada y término de búsqueda
+  const [selectedCategory, setSelectedCategory] = useState("todos");
+  const [searchTerm, setSearchTerm] = useState("");
 
+  // Lista de productos
   const products = [
-    {
-      id: 1,
-      name: "Call Of Duty: Black Ops 6",
-      price: 100,
-      genero: "accion",
-      images: [Cod6, Gow],
-    },
-    {
-      id: 2,
-      name: "God Of War: Ragnarok",
-      price: 100,
-      genero: "aventura",
-      images: [Gow, Age],
-    },
-    {
-      id: 3,
-      name: "Forza Horizon 5",
-      price: 100,
-      genero: "autos",
-      images: [Fh5, Ron],
-    },
-    {
-      id: 4,
-      name: "Fifa 2024",
-      price: 100,
-      genero: "deporte",
-      images: [Fifa2024, Fh5],
-    },
-    {
-      id: 5,
-      name: "Age Of Mythology",
-      price: 100,
-      genero: "gestion",
-      images: [Age, Fifa2024],
-    },
-    {
-      id: 6,
-      name: "Ready or Not",
-      price: 100,
-      genero: "simulador",
-      images: [Ron, Cod6],
-    },
+    { id: 1, name: "Call Of Duty: Black Ops 6", price: 100, genero: "accion", image: Cod6 },
+    { id: 2, name: "God Of War: Ragnarok", price: 100, genero: "aventura", image: Gow },
+    { id: 3, name: "Forza Horizon 5", price: 100, genero: "autos", image: Fh5 },
+    { id: 4, name: "Fifa 2024", price: 100, genero: "deporte", image: Fifa2024 },
+    { id: 5, name: "Age Of Mythology", price: 100, genero: "estrategia", image: Age },
+    { id: 6, name: "Ready or Not", price: 100, genero: "simulacion", image: Ron },
   ];
 
-  const filteredProducts = 
-  selectedCategory === "todos"
-  ? products
-  : products.filter(product => product.genero === selectedCategory);
+  // Filtrar productos según categoría y búsqueda
+  const filteredProducts = products.filter((product) => {
+    const matchesCategory =
+      selectedCategory === "todos" || product.genero === selectedCategory;
+    const matchesSearchTerm = product.name
+      .toLowerCase()
+      .includes(searchTerm.toLowerCase());
+    return matchesCategory && matchesSearchTerm;
+  });
 
   return (
     <div className="container productos mt-4">
-      <div className="filter-containet mb-4">
-        <label htmlFor="category">
+      {/* Filtros: Categoría y búsqueda */}
+      <div className="filter-container mb-4">
+        <label htmlFor="category" className="me-2">
           Categoría:
         </label>
-        <select id="category" 
-        className="form-select w-auto d-inline"
-        onChange={(e)=> setSelectedCategory(e.target.value)}
+        <select
+          id="category"
+          className="form-select w-auto d-inline me-4"
+          onChange={(e) => setSelectedCategory(e.target.value)}
         >
           <option value="todos">Todos</option>
           <option value="accion">Acción</option>
@@ -83,8 +57,21 @@ const Productos = () => {
           <option value="estrategia">Estrategia</option>
           <option value="simulacion">Simulación</option>
         </select>
+
+        <label htmlFor="search" className="me-2">
+          Buscar:
+        </label>
+        <input
+          type="text"
+          id="search"
+          className="form-control d-inline w-auto"
+          placeholder="Escribe un nombre"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
       </div>
 
+      
       <div className="row">
         {filteredProducts.map((product) => (
           <div key={product.id} className="col-md-4 mb-4">
@@ -93,48 +80,23 @@ const Productos = () => {
         ))}
       </div>
     </div>
+    
   );
 };
 
 const ProductCard = ({ product, addToCart }) => {
-  const handleAddToCart = ()=>{
+  const handleAddToCart = () => {
     addToCart(product);
     toast.success(`${product.name} agregado al carrito`, {
       position: "top-right",
       autoClose: 2000,
-    })
-  }
+    });
+  };
+
   return (
     <div className="card h-100">
-      <div id={`carousel-${product.id}`} className="carousel slide" data-bs-ride="carousel">
-        <div className="carousel-inner">
-          {product.images.map((image, index) => (
-            <div
-              key={index}
-              className={`carousel-item ${index === 0 ? "active" : ""}`}
-            >
-              <img src={image} className="d-block w-100" alt={product.name} />
-            </div>
-          ))}
-        </div>
-        <button
-          className="carousel-control-prev"
-          type="button"
-          data-bs-target={`#carousel-${product.id}`}
-          data-bs-slide="prev"
-        >
-          <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span className="visually-hidden">Previous</span>
-        </button>
-        <button
-          className="carousel-control-next"
-          type="button"
-          data-bs-target={`#carousel-${product.id}`}
-          data-bs-slide="next"
-        >
-          <span className="carousel-control-next-icon" aria-hidden="true"></span>
-          <span className="visually-hidden">Next</span>
-        </button>
+      <div className="image-container">
+        <img src={product.image} alt={product.name} className="card-img-top" />
       </div>
       <div className="card-body text-center">
         <h5 className="card-title">{product.name}</h5>
